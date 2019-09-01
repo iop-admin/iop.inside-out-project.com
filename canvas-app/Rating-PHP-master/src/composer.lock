@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "edf8db212b39844acc9221cc67977fd8",
+    "packages": [
+        {
+            "name": "celtic/lti",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/celtic-project/LTI-PHP.git",
+                "reference": "a3a5e3f85017e090b2eb71daab3f618d13c15c55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/celtic-project/LTI-PHP/zipball/a3a5e3f85017e090b2eb71daab3f618d13c15c55",
+                "reference": "a3a5e3f85017e090b2eb71daab3f618d13c15c55",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ceLTIc\\LTI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen P Vickers",
+                    "email": "stephen@spvsoftwareproducts.com"
+                }
+            ],
+            "description": "PHP class library for building LTI integrations",
+            "homepage": "https://github.com/celtic-project/LTI-PHP",
+            "keywords": [
+                "LTI"
+            ],
+            "time": "2019-04-03T22:38:01+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

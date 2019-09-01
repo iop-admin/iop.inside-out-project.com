@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Login Test</title>
+	</head>
+
+	<body>
+
+
+
+		<script>
+			var url = 'http://iop.inside-out-project.com/inside/wp-json/jwt-auth/v1/token';
+			var data = {
+				username: 'bsavage',
+				password: '!CYouUpThere2'
+			};
+
+			fetch(url, {
+					method: 'POST', // or 'PUT'
+					body: JSON.stringify(data), // data can be `string` or {object}!
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}).then(res => res.json())
+				.then(response => console.log('Success:', JSON.stringify(response)))
+				.catch(error => console.error('Error:', error));
+		</script>
+
+	</body>
+
+</html>
