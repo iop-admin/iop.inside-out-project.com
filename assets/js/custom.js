@@ -514,7 +514,7 @@ function initLearningObjectives() {
 
     let ttl = (CANVAS_PAGE_TITLE !== '') ? CANVAS_PAGE_TITLE : objret.title.rendered;
 
-    jQuery('#headerMainTitle, #actionWinTtl').text(ttl);
+    jQuery('#headerMainTitle, #actionWinTtl').text(decodeHTML(ttl));
 
     var lesson_time_to_complete = (objret.time_to_complete) ? parseInt(objret.time_to_complete) : 10;
 
