@@ -338,6 +338,8 @@ var appContent = {
 
     pageViews: {},
 
+    courseList: {},
+
     courses: {}
 
 };
@@ -1128,13 +1130,13 @@ jQuery(function() {
 
         screenfull.request(jQuery('#container')[0]).then(function() {
 
-                console.log('Browser entered fullscreen mode')
+            console.log('Browser entered fullscreen mode')
 
-            })
+        })
 
-            // Does not require jQuery. Can be used like this too:
+        // Does not require jQuery. Can be used like this too:
 
-            // screenfull.request(document.getElementById('container'));
+        // screenfull.request(document.getElementById('container'));
 
     });
 
@@ -1248,9 +1250,9 @@ function initSpeech() {
 
                     var option = jQuery('<option>')
 
-                        .val(index)
+                    .val(index)
 
-                        .html(voice.name + (voice.default ? ' (default)' : ''));
+                    .html(voice.name + (voice.default ? ' (default)' : ''));
 
 
 
@@ -2072,6 +2074,12 @@ function courseCards() {
 
         appContent.courses[hrid.id] = hrid;
 
+        if (hrid.id != "undefined") {
+            //console.log(hrid.id + '- ' + hrid.title.rendered);
+            //let tmpC = '{' + hrid.id + ',' + hrid.title.rendered + '}';
+            appContent.courseList[Number(hrid.id)] = hrid.title.rendered;
+            // console.log(hrid.id + '- ' + hrid.title.rendered);
+        }
     });
 
     pgBuilder = pgBuilder + `</div>`;
