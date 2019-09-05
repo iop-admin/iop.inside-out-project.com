@@ -520,6 +520,8 @@ function initLearningObjectives() {
 
     var lessonToDoListBuilder = '';
 
+    var lessonTotalPoints = '';
+
     var assignToDoListBuilder = '';
 
     if (objret.content.rendered) {
@@ -602,7 +604,7 @@ function initLearningObjectives() {
 
                     if (aItem.action_images.length > 0) {
 
-                        imgs = '<div class="sm-col-6"><ul><li><small><strong>Supporting Imges</strong></small><ul>';
+                        imgs = '<div class="sm-col-6"><ul><li><small><strong>Supporting Images</strong></small><ul>';
 
                         aItem.action_images.forEach(function(siid) {
 
@@ -619,8 +621,13 @@ function initLearningObjectives() {
                     if (aItem.action_resources) {
 
                         for (var key_r in aItem.action_resources) {
-
-                            rbld += '<li class="actionImage"><img src="' + aItem.action_resources[key_r].resource_screen_shot + '" onclick="getPageLink(\'' + aItem.action_resources[key_r].url + '\',\'' + aItem.action_resources[key_r].post_title + '\')" /></li>';
+                             console.log('action_resource_parameters: '+aItem.action_resource_parameters);
+                             let xx = (aItem.action_resource_parameters != undefined)?aItem.action_resource_parameters:'';
+                             console.log('xx: ' + xx);
+                             console.log('find ?: ' + aItem.action_resources[key_r].url.indexOf('?'));
+                             xx = (aItem.action_resources[key_r].url.indexOf('?') >= 0)?xx.replace('?', '&'):xx;
+                             console.log('xx: ' + xx);
+                            rbld += '<li class="actionImage"><img src="' + aItem.action_resources[key_r].resource_screen_shot + '" onclick="getPageLink(\'' + aItem.action_resources[key_r].url + xx + '\',\'' + aItem.action_resources[key_r].post_title + '\')" /></li>';
 
                         }
 
@@ -646,13 +653,15 @@ function initLearningObjectives() {
 
             lesson_time_to_complete = Number(lesson_time_to_complete) + Number(timer);
 
+            lessonTotalPoints = Number(lessonTotalPoints) + Number(tPoints);
+
         });
 
 
 
         jQuery('#assignment-po-content').append(lessonToDoListBuilder);
 
-        jQuery('#actionWinTtl').append(' <span class="pointTTL">( ' + lesson_time_to_complete + ' points total )</span>');
+        jQuery('#actionWinTtl').append(' <span class="pointTTL">( ' + lessonTotalPoints + ' points total )</span>');
 
     }
 
@@ -874,6 +883,11 @@ function initLearningObjectives() {
 
     }
 
+    if (lessonTotalPoints !== undefined && lessonTotalPoints > 0) {
+
+        jQuery('#action_items_list').append('<li style="color: rgb(4, 56, 81);font-size: 1.1em;font-weight: 600;text-align: center;"><i class="fa fa-bart-chart-o"></i> ' + lessonTotalPoints + ' total points possible for this lesson.</li>');
+
+    }
 
 
     if (isAdminUser) {
