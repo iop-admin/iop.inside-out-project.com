@@ -333,7 +333,9 @@ var appContent = {
 
      courseList: {},
 
-     courses: {}
+     courses: {},
+
+     featured_video: 0
 
 };
 
@@ -549,7 +551,7 @@ function initLearningObjectives() {
           }
 
           lesson_time_to_complete = Number(lesson_time_to_complete) + Number(fvt.time);
-
+          appContent.featured_video = fvt.post_id;
      } else {
 
           jQuery('.vidScr').hide();
@@ -764,34 +766,37 @@ function initLearningObjectives() {
                if (jQuery.type(hrid.featured_video) === 'object') {
 
                     console.log('hrid.featured_video: ' + hrid.featured_video);
-
+                    console.log('appContent.featured_video: ' + appContent.featured_video);
                     let vt = createResource(hrid.featured_video, curHRId, 'featured_video', hrid.start_featured_video_time, hrid.end_featured_video_time);
 
                     console.log('    start-end: ' + hrid.start_featured_video_time + ' | ' + hrid.end_featured_video_time);
-                    
+
                     let xx = (hrid.start_featured_video_time != undefined) ? hrid.start_featured_video_time : '';
-                    
+
                     console.log('xx: ' + xx);
 
                     console.log('curHRId: ' + curHRId);
-                    
-                    let st = (hrid.start_featured_video_time > 0)?hrid.start_featured_video_time : 0;
-                    let et = (hrid.end_featured_video_time > 0)?hrid.end_featured_video_time : 0;
-                    
-                    let time_math =  Math.floor((et - st) / 60);
-                    
-                    time_math = (time_math <= 0 && (st > 0 || et > 0))?1:time_math;
-                    
-                    let adjust_time = (st > 0 || et > 0)? Number(time_math) + Number(vt.time) : vt.time;
-                    
+
+                    let st = (hrid.start_featured_video_time > 0) ? hrid.start_featured_video_time : 0;
+                    let et = (hrid.end_featured_video_time > 0) ? hrid.end_featured_video_time : 0;
+
+                    let time_math = Math.floor((et - st) / 60);
+
+                    time_math = (time_math <= 0 && (st > 0 || et > 0)) ? 1 : time_math;
+
+                    let adjust_time = (st > 0 || et > 0) ? Number(time_math) + Number(vt.time) : vt.time;
+
                     console.log('                     - st: ' + st);
                     console.log('                     - et: ' + et);
                     console.log('                     - vt.time: ' + vt.time);
                     console.log('                     - adjust_time: ' + adjust_time);
-                    
+
                     loToDoListBuilder += '<li class="toDoLOItem-' + curHRId + '">' + timeDisplayBuilder(adjust_time) + ' | <i class="fab fa-youtube"></i> ' + vt.post_title + ' ' + glossaryTip(vidGloss) + '</li>';
 
-                    loTotalTime = Number(loTotalTime) + Number(adjust_time);
+                    if (appContent.featured_video != vt.post_id) {
+                         loTotalTime = Number(loTotalTime) + Number(adjust_time);
+                    }
+
 
                }
 
@@ -801,7 +806,7 @@ function initLearningObjectives() {
 
                     loToDoListBuilder += '<li class="toDoLOItem-' + curHRId + '">' + timeDisplayBuilder(fex.time) + ' | <i class="fas fa-link"></i> ' + fex.post_title + ' ' + glossaryTip(exampGloss) + '</li>';
 
-                    
+
                }
 
                if (jQuery.type(hrid.required_knowledge_resource) === 'object') {
@@ -902,8 +907,8 @@ function initLearningObjectives() {
 
 }
 
-function secondsToMinutes(time){
-    return Math.floor(time / 60)+'.'+Math.floor(time % 60);
+function secondsToMinutes(time) {
+     return Math.floor(time / 60) + '.' + Math.floor(time % 60);
 }
 
 function timeDisplayBuilder(t) {
@@ -1235,7 +1240,7 @@ function getPageLink(current_link, current_title = 'No Title') {
      let found = ignoreLink.find(el => current_link.includes(el));
 
      console.log('found: ' + found);
-     
+
      if (current_link === '') {
 
           alert('there is a problem with this link.');
@@ -1270,7 +1275,7 @@ function getPageLink(current_link, current_title = 'No Title') {
 
                var stime = (linkParms['t']) ? '' + linkParms['t'].replace('s', '') : '1';
 
-               current_link = 'https://www.youtube.com/embed/' + linkParms['v'] + '?enablejsapi=1&modestbranding=1&autohide=1&showinfo=0&controls=0&rel=0&start=' + stime;
+               current_link = 'https://www.youtube.com/embed/' + linkParms['v'] + '?enablejsapi=1&modestbranding=1&autohide=1&showinfo=0&controls=1&rel=0&start=' + stime;
 
                //console.log('current_link after time: ' + current_link);
 
@@ -1357,18 +1362,18 @@ function getVideoTitle(snippet_json_data) {
 }
 
 
-function createResource(obj, curHRId, resTyp = 'noType', start_time=0, end_time=0) {
+function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_time = 0) {
 
      console.log('starting createResource');
 
      for (var xa in obj) {
 
           xa = xa;
-          
-          console.log("             - resource start time: "+start_time);
-          console.log("             - resource end time: "+end_time);
-          console.log("             - resource curHRId: "+curHRId);
-          
+
+          console.log("             - resource start time: " + start_time);
+          console.log("             - resource end time: " + end_time);
+          console.log("             - resource curHRId: " + curHRId);
+
           var cid = obj[xa].id;
 
           var url = obj[xa].url;
@@ -1400,24 +1405,24 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time=0, end_time=
 
           }
 
-          
+
           console.log('                             ------- find ?: ' + url.indexOf('?'));
-                    
+
           let xx = '';
-          
+
           xx = url.replace('watch?v=', 'embed/');
-          
+
           // xx = (xx.indexOf('?') <= 0 && (start_time > 0 || end_time > 0)) ? xx+'?start=10&end=30' : url;
-          
-          xx = xx+'?enablejsapi=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0';
-          
-          xx = (start_time > 0 )? xx+'&start='+start_time : xx;
-          xx = (end_time > 0 )? xx+'&end='+end_time : xx;
-          
+
+          xx = xx + '?enablejsapi=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1';
+
+          xx = (start_time > 0) ? xx + '&start=' + start_time : xx;
+          xx = (end_time > 0) ? xx + '&end=' + end_time : xx;
+
           console.log('                             ------- xx: ' + xx);
 
-          console.log("                             ------- url: "+url);
-          
+          console.log("                             ------- url: " + url);
+
           let resObj = '<div class="lessonVideoWrapper ' + resTyp + 'Wrapper" onclick="getPageLink(\'' + xx + '\',\'' + post_title.replace(/("|')/g, "") + '\')"><span class="glossary-tooltip"><span class="glossary-link"><img class="lessonVideo ' + resTyp + 'Item ' + resFor + '" data-toggle="popover" width="200" src="' + resource_screen_shot + '" data-provider="youtube" /></span><span class="hidden glossary-tooltip-content clearfix"><span class="glossary-tooltip-text">' + post_title + '</span></span></div>';
 
 
@@ -1484,7 +1489,7 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time=0, end_time=
 
                var fv = url;
 
-               fv += '?enablejsapi=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0';
+               fv += '?enablejsapi=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1';
 
                fv = fv.replace('watch?v=', 'embed\/');
 
