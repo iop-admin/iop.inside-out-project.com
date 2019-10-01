@@ -2785,3 +2785,29 @@ span.pointTTL {
 .action_items_list_main .action-items-resources {
      display: none;
 }
+.helperTxtLinks {
+     font-weight: 600;
+     cursor: pointer;
+}
+.helperTxtLinks:hover {
+     font-weight: bold;
+     color: #000;
+}
+aside.replacementVars {
+     padding: 6px 12px;
+     background-color: #EEE;
+     position: sticky;
+     width: 100%;
+     margin: 0px;
+     border: thin #333 solid;
+     border-radius: 10px;
+     text-align: center;
+     font-size: 14px !important;
+     top: 60px;
+}
+aside.replacementVars h3 {
+     font-size: 16px !important;
+}
+aside.replacementVars ul {
+     list-style: none;
+}
