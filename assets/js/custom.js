@@ -382,7 +382,102 @@ jQuery(window).ready(function () {
 
 
      changeView(curPType, curId);
-
+     
+               var lessVars = false;
+               var listItems = '';
+     
+               if (CANVAS_IOP_COURSE_NAME != 'xx') {
+                         
+                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NAME+'</b>';
+                         
+                         jQuery(".main-content ").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         jQuery(".action_items_list_main").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         jQuery("#assignment-po-content").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         listItems += '<li>{Course_Name} = '+stpRpl+'</li>';
+                         lessVars = true;
+               }
+     
+               if (CANVAS_IOP_COURSE_NUMBER != 'xx') {
+                         
+                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NUMBER+'</b>';
+                         
+                         jQuery(".main-content ").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+                         });
+                         jQuery(".action_items_list_main").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+                         });
+                         jQuery("#assignment-po-content").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+                         });
+                         listItems += '<li>{Course_Number} = '+stpRpl+'</li>';
+                         lessVars = true;
+               }
+     
+               if (CANVAS_IOP_COURSE_NAME != 'xx') {
+                         
+                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NAME+'</b>';
+                         
+                         jQuery(".main-content ").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         jQuery(".action_items_list_main").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         jQuery("#assignment-po-content").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+                         });
+                         listItems += '<li>{Course_Name} = '+stpRpl+'</li>';
+                         lessVars = true;
+               }
+     
+               if (CANVAS_IOP_STEP != 'xx') {
+                         
+                         let stpRpl = '<b>'+CANVAS_IOP_STEP+'</b>';
+                         
+                         jQuery(".main-content ").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+                         });
+                         jQuery(".action_items_list_main").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+                         });
+                         jQuery("#assignment-po-content").children().each(function () {
+                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+                         });
+                    
+                         listItems += '<li>{Step_Number} = '+stpRpl+'</li>';
+                         lessVars = true;
+               }
+                    if (lessVars) {
+                         let stpUpdate = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                             <h4 class="alert-heading">IMPORTANT | Please Read!!!!!</h4> 
+                                             <div class="lead">
+                                                  For this assignment, we use a generic video that can be used in any web/iop lesson/classes that uses the video to teach a skill. Understanding this, please be sure to replace <strong>iop-xxx</strong> with <strong>${CANVAS_IOP_STEP}</strong> any time you see it being used in the video or instructions.
+                                             </div>
+                                             <div class="text-sm-right helperTxtLinks" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                  learn more here
+                                             </div>
+                                             <hr>
+                                             <div class="collapse" id="collapseExample">
+                                               <div class="card card-body">
+                                                 <p>As mentioned, there are many videos that are reused through the inside out project to reduce the effort to keep them up to date as technology and interfaces change. All the lessons leveraging these shared videos will display this message and explain that you must replace the generic step number with the one associated with the current lesson/assignment. In this case you will be replacing <strong>iop-xxx</strong> with <strong>${CANVAS_IOP_STEP}. </strong></p>
+                                                  <p>Should you still be having difficulty in grasping this please <span onclick="getPageLink('https://inside-out-project.com/contact-me/?iframe=true', 'Contact Your Professor')" class="helperTxtLinks">reach out to me immediately. </span><span onclick="getPageLink('https://inside-out-project.com/make-appointment/?iframe=true', 'Schedule Office Hours')" class="helperTxtLinks">or schedule a time to meet during my office hours. </span>  </p>
+                                               </div>
+                                             </div>
+                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                             </button>
+                                           </div>
+                                             <aside class="replacementVars"><h3>Assignment Variables</h3><ul>${listItems}</ul></aside>`;
+                    
+                         jQuery('.content-item-description').prepend(stpUpdate);
+                    }
 
 });
 
@@ -501,9 +596,7 @@ function initLearningObjectives() {
      var assignToDoListBuilder = '';
 
      if (objret.content.rendered) {
-
           jQuery('.content-item-description').append(objret.content.rendered);
-
      }
 
      if (!isAssign) {
@@ -597,12 +690,12 @@ function initLearningObjectives() {
                          if (aItem.action_resources) {
 
                               for (var key_r in aItem.action_resources) {
-                                   console.log('action_resource_parameters: ' + aItem.action_resource_parameters);
+                                   //console.log('action_resource_parameters: ' + aItem.action_resource_parameters);
                                    let xx = (aItem.action_resource_parameters != undefined) ? aItem.action_resource_parameters : '';
-                                   console.log('xx: ' + xx);
-                                   console.log('find ?: ' + aItem.action_resources[key_r].url.indexOf('?'));
+                                   //console.log('xx: ' + xx);
+                                   //console.log('find ?: ' + aItem.action_resources[key_r].url.indexOf('?'));
                                    xx = (aItem.action_resources[key_r].url.indexOf('?') >= 0) ? xx.replace('?', '&') : xx;
-                                   console.log('xx: ' + xx);
+                                   //console.log('xx: ' + xx);
                                    rbld += '<li class="actionImage"><img src="' + aItem.action_resources[key_r].resource_screen_shot + '" onclick="getPageLink(\'' + aItem.action_resources[key_r].url + xx + '\',\'' + aItem.action_resources[key_r].post_title + '\')" /></li>';
 
                               }
@@ -703,7 +796,7 @@ function initLearningObjectives() {
           var theVids = '';
 
           objret.learning_objectives.forEach(function (hrid) {
-               console.log('    hrid: ' + hrid.id + ' | ' + hrid.post_title);
+               //console.log('    hrid: ' + hrid.id + ' | ' + hrid.post_title);
                let loTtcJSONVal = (hrid.time_to_complete != null) ? parseInt(hrid.time_to_complete) : 5;
 
                let lo_ttc = (loTtcJSONVal !== undefined && loTtcJSONVal > 0) ? loTtcJSONVal : 30;
@@ -765,17 +858,17 @@ function initLearningObjectives() {
 
                if (jQuery.type(hrid.featured_video) === 'object') {
 
-                    console.log('hrid.featured_video: ' + hrid.featured_video);
-                    console.log('appContent.featured_video: ' + appContent.featured_video);
+                    //console.log('hrid.featured_video: ' + hrid.featured_video);
+                    //console.log('appContent.featured_video: ' + appContent.featured_video);
                     let vt = createResource(hrid.featured_video, curHRId, 'featured_video', hrid.start_featured_video_time, hrid.end_featured_video_time);
 
-                    console.log('    start-end: ' + hrid.start_featured_video_time + ' | ' + hrid.end_featured_video_time);
+                    //console.log('    start-end: ' + hrid.start_featured_video_time + ' | ' + hrid.end_featured_video_time);
 
                     let xx = (hrid.start_featured_video_time != undefined) ? hrid.start_featured_video_time : '';
 
-                    console.log('xx: ' + xx);
+                    //console.log('xx: ' + xx);
 
-                    console.log('curHRId: ' + curHRId);
+                    //console.log('curHRId: ' + curHRId);
 
                     let st = (hrid.start_featured_video_time > 0) ? hrid.start_featured_video_time : 0;
                     let et = (hrid.end_featured_video_time > 0) ? hrid.end_featured_video_time : 0;
@@ -786,10 +879,10 @@ function initLearningObjectives() {
 
                     let adjust_time = (st > 0 || et > 0) ? Number(time_math) + Number(vt.time) : vt.time;
 
-                    console.log('                     - st: ' + st);
-                    console.log('                     - et: ' + et);
-                    console.log('                     - vt.time: ' + vt.time);
-                    console.log('                     - adjust_time: ' + adjust_time);
+                    //console.log('                     - st: ' + st);
+                    //console.log('                     - et: ' + et);
+                    //console.log('                     - vt.time: ' + vt.time);
+                    //console.log('                     - adjust_time: ' + adjust_time);
 
                     loToDoListBuilder += '<li class="toDoLOItem-' + curHRId + '">' + timeDisplayBuilder(adjust_time) + ' | <i class="fab fa-youtube"></i> ' + vt.post_title + ' ' + glossaryTip(vidGloss) + '</li>';
 
@@ -921,7 +1014,7 @@ function timeDisplayBuilder(t) {
 function initDom() {
 
 
-     console.log('curPType initDom: ' + curPType);
+     //console.log('curPType initDom: ' + curPType);
 
 
      loader('Initializing DOM', 'app-initDOM', 1);
@@ -1062,7 +1155,7 @@ jQuery(function () {
 
           screenfull.request(jQuery('#container')[0]).then(function () {
 
-               console.log('Browser entered fullscreen mode')
+               //console.log('Browser entered fullscreen mode')
 
           })
 
@@ -1077,7 +1170,7 @@ jQuery(function () {
 
           screenfull.exit().then(function () {
 
-               console.log('Browser exited fullscreen mode')
+               //console.log('Browser exited fullscreen mode')
 
           });
 
@@ -1088,7 +1181,7 @@ jQuery(function () {
 
           screenfull.toggle(jQuery('#container')[0]).then(function () {
 
-               console.log('Fullscreen mode: ' + (screenfull.isFullscreen ? 'enabled' : 'disabled'))
+               //console.log('Fullscreen mode: ' + (screenfull.isFullscreen ? 'enabled' : 'disabled'))
 
           });
 
@@ -1220,7 +1313,7 @@ function initSpeech() {
 
      } else {
 
-          console.log('This browser does not support text to speech.');
+          //console.log('This browser does not support text to speech.');
 
      }
 
@@ -1229,7 +1322,7 @@ function initSpeech() {
 
 function getPageLink(current_link, current_title = 'No Title') {
 
-     console.log('current_link: ' + current_link);
+     //console.log('current_link: ' + current_link);
 
      var linkChk;
 
@@ -1239,7 +1332,7 @@ function getPageLink(current_link, current_title = 'No Title') {
 
      let found = ignoreLink.find(el => current_link.includes(el));
 
-     console.log('found: ' + found);
+     //console.log('found: ' + found);
 
      if (current_link === '') {
 
@@ -1247,9 +1340,9 @@ function getPageLink(current_link, current_title = 'No Title') {
 
      } else if (found !== undefined) {
 
-          console.log('HERE: ' + ignoreLink.indexOf(current_link));
+          //console.log('HERE: ' + ignoreLink.indexOf(current_link));
 
-          console.log('current_link: ' + current_link);
+          //console.log('current_link: ' + current_link);
 
           addModal('Opening Link In New Window', 'This link prevents other sites from opening it in an iframe. We will now open the link in a new window/tab for you. <br />' + current_link, 'new window', 1);
 
@@ -1364,15 +1457,15 @@ function getVideoTitle(snippet_json_data) {
 
 function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_time = 0) {
 
-     console.log('starting createResource');
+     //console.log('starting createResource');
 
      for (var xa in obj) {
 
           xa = xa;
 
-          console.log("             - resource start time: " + start_time);
-          console.log("             - resource end time: " + end_time);
-          console.log("             - resource curHRId: " + curHRId);
+          //console.log("             - resource start time: " + start_time);
+          //console.log("             - resource end time: " + end_time);
+          //console.log("             - resource curHRId: " + curHRId);
 
           var cid = obj[xa].id;
 
@@ -1406,7 +1499,7 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_tim
           }
 
 
-          console.log('                             ------- find ?: ' + url.indexOf('?'));
+          //console.log('                             ------- find ?: ' + url.indexOf('?'));
 
           let xx = '';
 
@@ -1419,9 +1512,9 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_tim
           xx = (start_time > 0) ? xx + '&start=' + start_time : xx;
           xx = (end_time > 0) ? xx + '&end=' + end_time : xx;
 
-          console.log('                             ------- xx: ' + xx);
+          //console.log('                             ------- xx: ' + xx);
 
-          console.log("                             ------- url: " + url);
+          //console.log("                             ------- url: " + url);
 
           let resObj = '<div class="lessonVideoWrapper ' + resTyp + 'Wrapper" onclick="getPageLink(\'' + xx + '\',\'' + post_title.replace(/("|')/g, "") + '\')"><span class="glossary-tooltip"><span class="glossary-link"><img class="lessonVideo ' + resTyp + 'Item ' + resFor + '" data-toggle="popover" width="200" src="' + resource_screen_shot + '" data-provider="youtube" /></span><span class="hidden glossary-tooltip-content clearfix"><span class="glossary-tooltip-text">' + post_title + '</span></span></div>';
 
@@ -1485,7 +1578,7 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_tim
 
           if (resTyp == "featured_video" && jQuery('.video-content iframe').attr('src') == '') {
 
-               console.log('got here: ' + url);
+               //console.log('got here: ' + url);
 
                var fv = url;
 
@@ -1493,7 +1586,7 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_tim
 
                fv = fv.replace('watch?v=', 'embed\/');
 
-               console.log('    fv: ' + fv);
+               //console.log('    fv: ' + fv);
 
                jQuery('.video-content iframe').attr('src', fv);
 
@@ -1709,11 +1802,11 @@ function fullscreenChange() {
 
           document.msFullscreenElement) {
 
-          console.log('enter fullscreen');
+          //console.log('enter fullscreen');
 
      } else {
 
-          console.log('exit fullscreen');
+          //console.log('exit fullscreen');
 
      }
 
@@ -1781,9 +1874,9 @@ function changeView(view, itemId) {
 
                jQuery(".courseCard").on("click", function () {
 
-                    console.log(this.id + ' clicked.');
+                    //console.log(this.id + ' clicked.');
 
-                    console.log(ptype + ' ptype.');
+                    //console.log(ptype + ' ptype.');
 
                     changeView('course', this.id);
 
@@ -1872,7 +1965,7 @@ function changeView(view, itemId) {
 
                     jQuery(".lazy").on("load", function () {
 
-                         console.log(this + ' iframe loaded');
+                         //console.log(this + ' iframe loaded');
 
                     });
 
@@ -1912,7 +2005,7 @@ function changeView(view, itemId) {
 
                     if (curPType === "iop_assignment" || curPType === "lp_assignment") {
 
-                         console.log('inside assignment instructions: ' + curPType + ': ' + (curPType === "iop_assignment" || curPType === "lp_assignment"));
+                         //console.log('inside assignment instructions: ' + curPType + ': ' + (curPType === "iop_assignment" || curPType === "lp_assignment"));
 
                     }
 
@@ -1971,7 +2064,7 @@ function courseCards() {
                //console.log(hrid.id + '- ' + hrid.title.rendered);
                //let tmpC = '{' + hrid.id + ',' + hrid.title.rendered + '}';
                appContent.courseList[Number(hrid.id)] = hrid.title.rendered;
-               // console.log(hrid.id + '- ' + hrid.title.rendered);
+               // //console.log(hrid.id + '- ' + hrid.title.rendered);
           }
      });
 
