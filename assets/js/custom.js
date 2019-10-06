@@ -382,80 +382,91 @@ jQuery(window).ready(function () {
 
 
      changeView(curPType, curId);
-     
-               var lessVars = false;
-               var listItems = '';
-     
-               if (CANVAS_IOP_COURSE_NAME != 'xx') {
-                         
-                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NAME+'</b>';
-                         
-                         jQuery(".main-content ").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         jQuery(".action_items_list_main").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         jQuery("#assignment-po-content").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         listItems += '<li>{Course_Name} = '+stpRpl+'</li>';
-                         lessVars = true;
+
+     var lessVars = false;
+     var listItems = '';
+
+     if (CANVAS_IOP_COURSE_NAME != 'xx') {
+
+          let stpRpl = '<b>' + CANVAS_IOP_COURSE_NAME + '</b>';
+
+          jQuery(".main-content ").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          jQuery(".action_items_list_main").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          jQuery("#assignment-po-content").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          listItems += '<li>{Course_Name} = ' + stpRpl + '</li>';
+          lessVars = true;
+     }
+
+     if (CANVAS_IOP_COURSE_NUMBER != 'xx') {
+
+          let stpRpl = '<b>' + CANVAS_IOP_COURSE_NUMBER + '</b>';
+
+          jQuery(".main-content ").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+          });
+          jQuery(".action_items_list_main").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+          });
+          jQuery("#assignment-po-content").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
+          });
+          listItems += '<li>{Course_Number} = ' + stpRpl + '</li>';
+          lessVars = true;
+     }
+
+     if (CANVAS_IOP_COURSE_NAME != 'xx') {
+
+          let stpRpl = '<b>' + CANVAS_IOP_COURSE_NAME + '</b>';
+
+          jQuery(".main-content ").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          jQuery(".action_items_list_main").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          jQuery("#assignment-po-content").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
+          });
+          listItems += '<li>{Course_Name} = ' + stpRpl + '</li>';
+          lessVars = true;
+     }
+
+     if (CANVAS_IOP_STEP != 'xx') {
+
+          let stpRpl = '<b>' + CANVAS_IOP_STEP + '</b>';
+
+          jQuery(".main-content ").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+          });
+          jQuery(".action_items_list_main").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+          });
+          jQuery("#assignment-po-content").children().each(function () {
+               jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
+          });
+
+/*
+          let ww = document.getElementById('headerMainTitle').innerHTML.split('|')
+          var rr = CANVAS_IOP_STEP;
+          for (i = 0; i <= ww.length; i++) {
+               if ((i > 0) && (i < 3)) {
+                    rr += ' | ' + ww[i]
                }
-     
-               if (CANVAS_IOP_COURSE_NUMBER != 'xx') {
-                         
-                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NUMBER+'</b>';
-                         
-                         jQuery(".main-content ").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
-                         });
-                         jQuery(".action_items_list_main").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
-                         });
-                         jQuery("#assignment-po-content").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NUMBER/g, stpRpl));
-                         });
-                         listItems += '<li>{Course_Number} = '+stpRpl+'</li>';
-                         lessVars = true;
-               }
-     
-               if (CANVAS_IOP_COURSE_NAME != 'xx') {
-                         
-                         let stpRpl = '<b>'+CANVAS_IOP_COURSE_NAME+'</b>';
-                         
-                         jQuery(".main-content ").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         jQuery(".action_items_list_main").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         jQuery("#assignment-po-content").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_COURSE_NAME/g, stpRpl));
-                         });
-                         listItems += '<li>{Course_Name} = '+stpRpl+'</li>';
-                         lessVars = true;
-               }
-     
-               if (CANVAS_IOP_STEP != 'xx') {
-                         
-                         let stpRpl = '<b>'+CANVAS_IOP_STEP+'</b>';
-                         
-                         jQuery(".main-content ").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
-                         });
-                         jQuery(".action_items_list_main").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
-                         });
-                         jQuery("#assignment-po-content").children().each(function () {
-                              jQuery(this).html(jQuery(this).html().replace(/VAR_IOP_STEP/g, stpRpl));
-                         });
-                    
-                         listItems += '<li>{Step_Number} = '+stpRpl+'</li>';
-                         lessVars = true;
-               }
-                    if (lessVars) {
-                         let stpUpdate = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          }
+          document.getElementById('headerMainTitle').innerHTML = rr;
+*/
+          listItems += '<li>iop-xxx = ' + stpRpl + '</li>';
+          listItems += '<li>{Step_Number} = ' + stpRpl + '</li>';
+          lessVars = true;
+     }
+     if (lessVars) {
+          let stpUpdate = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
                                              <h4 class="alert-heading">IMPORTANT | Please Read!!!!!</h4> 
                                              <div class="lead">
                                                   For this assignment, we use a generic video that can be used in any web/iop lesson/classes that uses the video to teach a skill. Understanding this, please be sure to replace <strong>iop-xxx</strong> with <strong>${CANVAS_IOP_STEP}</strong> any time you see it being used in the video or instructions.
@@ -475,9 +486,9 @@ jQuery(window).ready(function () {
                                              </button>
                                            </div>
                                              <aside class="replacementVars"><h3>Assignment Variables</h3><ul>${listItems}</ul></aside>`;
-                    
-                         jQuery('.content-item-description').prepend(stpUpdate);
-                    }
+
+          jQuery('.content-item-description').prepend(stpUpdate);
+     }
 
 });
 
