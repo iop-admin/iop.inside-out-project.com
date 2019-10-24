@@ -388,7 +388,7 @@ jQuery(window).ready(function () {
           var lessVars = false;
           var listItems = '';
 
-          if (CANVAS_IOP_COURSE_NAME != 'xx') {
+          if (CANVAS_IOP_COURSE_NAME != 'xx' && window.find('VAR_IOP_COURSE_NAME')) {
 
                let stpRpl = '<b>' + CANVAS_IOP_COURSE_NAME + '</b>';
 
@@ -405,7 +405,7 @@ jQuery(window).ready(function () {
                lessVars = true;
           }
 
-          if (CANVAS_IOP_COURSE_NUMBER != 'xx') {
+          if (CANVAS_IOP_COURSE_NUMBER != 'xx' && window.find('VAR_IOP_COURSE_NUMBER')) {
 
                let stpRpl = '<b>' + CANVAS_IOP_COURSE_NUMBER + '</b>';
 
@@ -422,7 +422,7 @@ jQuery(window).ready(function () {
                lessVars = true;
           }
 
-          if (CANVAS_IOP_COURSE_NAME != 'xx') {
+          if (CANVAS_IOP_COURSE_NAME != 'xx' && window.find('VAR_IOP_COURSE_NAME')) {
 
                let stpRpl = '<b>' + CANVAS_IOP_COURSE_NAME + '</b>';
 
@@ -439,7 +439,7 @@ jQuery(window).ready(function () {
                lessVars = true;
           }
 
-          if (CANVAS_IOP_STEP != 'xx') {
+          if (CANVAS_IOP_STEP != 'xx' && window.find('VAR_IOP_STEP')) {
 
                let stpRpl = '<b>' + CANVAS_IOP_STEP + '</b>';
 
@@ -624,19 +624,23 @@ function initLearningObjectives() {
           jQuery('.content-item-description').append(`
 
                     <div id="assignment-details">
-
-                        <h5>Assignment Performance Objectives</h5>
-
-                        <ul id="assignment-po-content"></ul>
-
-                        <h5>Submitting This Assignment</h5>
-
-                        <div id="submit-assignment-content">
-
-                            ${objret.assignment_submission_instructions}
-
-                        </div>
-
+					<div id="assignment-content-div">
+                        		<h5>Assignment Performance Objectives</h5>
+                        		<ul id="assignment-po-content"></ul>
+					</div>
+					<div id="add-assignment-resources-div" style="display:none;">
+                        		<h5>Assignment Resources</h5>
+                        		<div class="container">
+							<div id="add-assignment-resources" class="row">
+							</div>
+						</div>
+					</div>
+					<div id="submit-assignment-content-div">
+                        		<h5>Submitting This Assignment</h5>
+						<div id="submit-assignment-content">
+                            		${objret.assignment_submission_instructions}
+						</div>
+					</div>
                     </div>
 
             `);
@@ -1527,17 +1531,22 @@ function createResource(obj, curHRId, resTyp = 'noType', start_time = 0, end_tim
           xx = (end_time > 0) ? xx + '&end=' + end_time : xx;
 
           //console.log('                             ------- xx: ' + xx);
-
-          //console.log("                             ------- url: " + url);
+		//console.log('                             ------- : isAssign' + isAssign);
+         	//console.log("                             ------- url: " + url);
 
           let resObj = '<div class="lessonVideoWrapper ' + resTyp + 'Wrapper" onclick="getPageLink(\'' + xx + '\',\'' + post_title.replace(/("|')/g, "") + '\')"><span class="glossary-tooltip"><span class="glossary-link"><img class="lessonVideo ' + resTyp + 'Item ' + resFor + '" data-toggle="popover" width="200" src="' + resource_screen_shot + '" data-provider="youtube" /></span><span class="hidden glossary-tooltip-content clearfix"><span class="glossary-tooltip-text">' + post_title + '</span></span></div>';
-
-
+		
+		
           if (resourceList.indexOf(url) === -1) {
 
 
                resourceList.push(url);
 
+
+			if(isAssign){
+				jQuery('#add-assignment-resources').append('<div class="lessonVideoWrapper ' + resTyp + 'Wrapper col" onclick="getPageLink(\'' + xx + '\',\'' + post_title.replace(/("|')/g, "") + '\')"><span class="glossary-tooltip"><span class="glossary-link"><img class="lessonVideo ' + resTyp + 'Item ' + resFor + '" data-toggle="popover" width="100" src="' + resource_screen_shot + '" data-provider="youtube" /></span><span class="hidden glossary-tooltip-content clearfix"><span class="glossary-tooltip-text">' + post_title + '</span></span></div>');
+				jQuery('#add-assignment-resources-div').show();
+			}
 
                if ((resFor.indexOf('youtube') != -1) || (resFor.indexOf('vimeo') != -1) || (resFor.indexOf('video') != -1)) {
 
